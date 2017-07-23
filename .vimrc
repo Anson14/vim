@@ -1,3 +1,7 @@
+"set background=dark
+
+
+
 set sw=4
 set ts=4
 set et
@@ -29,43 +33,45 @@ let g:syntastic_php_checkers=['php', 'phpcs', 'phpmd']
 let g:fencview_autodetect=0
 set rtp+=$GOROOT/misc/vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 显示相关  
+" 显示相关
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax on
 set cul "高亮光标所在行
 set cuc
-set shortmess=atI   " 启动的时候不显示那个援助乌干达儿童的提示  
-set go=             " 不要图形按钮  
-"color desert     " 设置背景主题  
-color ron     " 设置背景主题  
-"color torte     " 设置背景主题  
-"set guifont=Courier_New:h10:cANSI   " 设置字体  
-"autocmd InsertLeave * se nocul  " 用浅色高亮当前行  
-autocmd InsertEnter * se cul    " 用浅色高亮当前行  
-set ruler           " 显示标尺  
-set showcmd         " 输入的命令显示出来，看的清楚些  
-"set whichwrap+=<,>,h,l   " 允许backspace和光标键跨越行边界(不建议)  
-set scrolloff=3     " 光标移动到buffer的顶部和底部时保持3行距离  
-set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}   "状态行显示的内容  
-set laststatus=2    " 启动显示状态行(1),总是显示状态行(2)  
-"set foldenable      " 允许折叠  
-""set foldmethod=manual   " 手动折叠  
-set nocompatible  "去掉讨厌的有关vi一致性模式，避免以前版本的一些bug和局限  
+set shortmess=atI   " 启动的时候不显示那个援助乌干达儿童的提示
+set go=             " 不要图形按钮
+"color desert     " 设置背景主题
+"color ron     " 设置背景主题
+"color torte     " 设置背景主题
+"set guifont=Courier_New:h10:cANSI   " 设置字体
+"autocmd InsertLeave * se nocul  " 用浅色高亮当前行
+autocmd InsertEnter * se cul    " 用浅色高亮当前行
+set ruler           " 显示标尺
+set showcmd         " 输入的命令显示出来，看的清楚些
+"set whichwrap+=<,>,h,l   " 允许backspace和光标键跨越行边界(不建议)
+set scrolloff=3     " 光标移动到buffer的顶部和底部时保持3行距离
+set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}   "状态行显示的内容
+set laststatus=2    " 启动显示状态行(1),总是显示状态行(2)
+"set foldenable      " 允许折叠
+""set foldmethod=manual   " 手动折叠
+set nocompatible  "去掉讨厌的有关vi一致性模式，避免以前版本的一些bug和局限
 " 显示中文帮助
 if version >= 603
-	set helplang=cn
-	set encoding=utf-8
+    set helplang=cn
+    set encoding=utf-8
 endif
 " 自动缩进
 set autoindent
 set cindent
 " Tab键的宽度
+
+
 set tabstop=4
 " 统一缩进为4
 set softtabstop=4
 set shiftwidth=4
 " 使用空格代替制表符
-set expandtab
+"set expandtab
 " 在行和段开始处使用制表符
 set smarttab
 " 显示行号
@@ -96,69 +102,83 @@ set iskeyword+=_,$,@,%,#,-
 au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}   set filetype=mkd
 au BufRead,BufNewFile *.{go}   set filetype=go
 au BufRead,BufNewFile *.{js}   set filetype=javascript
-"rkdown to HTML  
+"rkdown to HTML
 nmap md :!~/.vim/markdown.pl % > %.html <CR><CR>
 nmap fi :!firefox %.html & <CR><CR>
 nmap \ \cc
 vmap \ \cc
 
 "将tab替换为空格
-nmap tt :%s/\t/    /g<CR>
+"nmap tt :%s/\t/    /g<CR>
 
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""新文件标题
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"新建.c,.h,.sh,.java文件，自动插入文件头 
-autocmd BufNewFile *.cpp,*.[ch],*.sh,*.rb,*.java,*.py exec ":call SetTitle()" 
-""定义函数SetTitle，自动插入文件头 
-func SetTitle() 
-	"如果文件类型为.sh文件 
-	if &filetype == 'sh' 
-		call setline(1,"\#!/bin/bash") 
-		call append(line("."), "") 
+"新建.c,.h,.sh,.java文件，自动插入文件头
+autocmd BufNewFile *.cpp,*.[ch],*.sh,*.rb,*.java,*.py exec ":call SetTitle()"
+""定义函数SetTitle，自动插入文件头
+func SetTitle()
+    "如果文件类型为.sh文件
+    if &filetype == 'sh'
+        call setline(1,"\#!/bin/bash")
+        call append(line("."), "")
     elseif &filetype == 'python'
         call setline(1,"#!/usr/bin/env python")
         call append(line("."),"# coding=utf-8")
-	    call append(line(".")+1, "") 
+        call append(line(".")+1, "")
 
     elseif &filetype == 'ruby'
         call setline(1,"#!/usr/bin/env ruby")
         call append(line("."),"# encoding: utf-8")
-	    call append(line(".")+1, "")
+        call append(line(".")+1, "")
 
-"    elseif &filetype == 'mkd'
-"        call setline(1,"<head><meta charset=\"UTF-8\"></head>")
-	else 
-		call setline(1, "/*************************************************************************") 
-		call append(line("."), "	> File Name: ".expand("%")) 
-		call append(line(".")+1, "	> Author: ") 
-		call append(line(".")+2, "	> Mail: ") 
-		call append(line(".")+3, "	> Created Time: ".strftime("%c")) 
-		call append(line(".")+4, " ************************************************************************/") 
-		call append(line(".")+5, "")
-	endif
-	if expand("%:e") == 'cpp'
-		call append(line(".")+6, "#include<iostream>")
-		call append(line(".")+7, "using namespace std;")
-		call append(line(".")+8, "")
-	endif
-	if &filetype == 'c'
-		call append(line(".")+6, "#include<stdio.h>")
-		call append(line(".")+7, "")
-	endif
-	if expand("%:e") == 'h'
-		call append(line(".")+6, "#ifndef _".toupper(expand("%:r"))."_H")
-		call append(line(".")+7, "#define _".toupper(expand("%:r"))."_H")
-		call append(line(".")+8, "#endif")
-	endif
-	if &filetype == 'java'
-		call append(line(".")+6,"public class ".expand("%:r"))
-		call append(line(".")+7,"")
-	endif
-	"新建文件后，自动定位到文件末尾
-endfunc 
+        "    elseif &filetype == 'mkd'
+        "        call setline(1,"<head><meta charset=\"UTF-8\"></head>")
+    else
+        call setline(1, "/*************************************************************************")
+        call append(line("."), "    > File Name: ".expand("%"))
+        call append(line(".")+1, "  > Author: Anson")
+        call append(line(".")+2, "  > Mail: 354830997@qq.com")
+        call append(line(".")+3, "  > Created Time: ".strftime("%c"))
+        call append(line(".")+4, " ************************************************************************/")
+        call append(line(".")+5, "")
+    endif
+    if expand("%:e") == 'cpp'
+        call append(line(".")+6, "#include <iostream>")
+        call append(line(".")+7, "#include <stdio.h>")
+        call append(line(".")+8, "#include <string>")
+        call append(line(".")+9, "#include <cstring>")
+        call append(line(".")+10, "#include <math.h>")
+        call append(line(".")+11, "#include <algorithm>")
+        call append(line(".")+12, "#include <bits/stdc++.h>")
+        call append(line(".")+13, "#define LL long long")
+        call append(line(".")+14, "#define clr(x) memset(x,0,sizeof(x))")
+        call append(line(".")+15, "using namespace std;")
+        call append(line(".")+16, "#define MAXN 1005")
+        call append(line(".")+17, "")
+        call append(line(".")+18, "int main() {")
+        call append(line(".")+19, "    ios::sync_with_stdio(false);")
+        call append(line(".")+20, "")
+        call append(line(".")+21, "    return 0;")
+        call append(line(".")+22, "}")
+    endif
+    if &filetype == 'c'
+        call append(line(".")+6, "#include<stdio.h>")
+        call append(line(".")+7, "")
+    endif
+    if expand("%:e") == 'h'
+        call append(line(".")+6, "#ifndef _".toupper(expand("%:r"))."_H")
+        call append(line(".")+7, "#define _".toupper(expand("%:r"))."_H")
+        call append(line(".")+8, "#endif")
+    endif
+    if &filetype == 'java'
+        call append(line(".")+6,"public class ".expand("%:r"))
+        call append(line(".")+7,"")
+    endif
+    "新建文件后，自动定位到文件末尾
+endfunc
 autocmd BufNewFile * normal G
 
 
@@ -172,7 +192,6 @@ map <S-Right> :tabn<CR>
 map! <C-Z> <Esc>zzi
 map! <C-O> <C-Y>,
 map <C-A> ggVG$"+y
-map <Esc><Esc> :w<CR>
 map <F12> gg=G
 map <C-w> <C-w>w
 imap <C-k> <C-y>,
@@ -185,52 +204,52 @@ imap <C-a> <Esc>^
 imap <C-e> <Esc>$
 vmap <C-c> "+y
 set mouse=v
-"set clipboard=unnamed
-"去空行  
-nnoremap <F2> :g/^\s*$/d<CR> 
-"比较文件  
-nnoremap <C-F2> :vert diffsplit 
+set clipboard=unnamedplus
+"去空行
+nnoremap <F2> :g/^\s*$/d<CR>
+"比较文件
+nnoremap <C-F2> :vert diffsplit
 "nnoremap <Leader>fu :CtrlPFunky<Cr>
 "nnoremap <C-n> :CtrlPFunky<Cr>
-"列出当前目录文件  
+"列出当前目录文件
 map <F3> :NERDTreeToggle<CR>
 imap <F3> <ESC> :NERDTreeToggle<CR>
-"打开树状文件目录  
-map <C-F3> \be  
+"打开树状文件目录
+map <C-F3> \be
 :autocmd BufRead,BufNewFile *.dot map <F5> :w<CR>:!dot -Tjpg -o %<.jpg % && eog %<.jpg  <CR><CR> && exec "redr!"
 "C，C++ 按F5编译运行
 map <F5> :call CompileRunGcc()<CR>
 func! CompileRunGcc()
-	exec "w"
-	if &filetype == 'c'
-		exec "!g++ % -o %<"
-		exec "!time ./%<"
-	elseif &filetype == 'cpp'
-		exec "!g++ % -std=c++11 -o %<"
-		exec "!time ./%<"
-	elseif &filetype == 'java' 
-		exec "!javac %" 
-		exec "!time java %<"
-	elseif &filetype == 'sh'
-		:!time bash %
-	elseif &filetype == 'python'
-		exec "!time python2.7 %"
+    exec "w"
+    if &filetype == 'c'
+        exec "!g++ % -o %<"
+        exec "!time ./%<"
+    elseif &filetype == 'cpp'
+        exec "!g++ % -o %<"
+        exec "!time ./%<"
+    elseif &filetype == 'java'
+        exec "!javac %"
+        exec "!time java %<"
+    elseif &filetype == 'sh'
+        :!time bash %
+    elseif &filetype == 'python'
+        exec "!time python2.7 %"
     elseif &filetype == 'html'
-        exec "!firefox % &"
+        exec "!google-chrome % &"
     elseif &filetype == 'go'
-"        exec "!go build %<"
+        "        exec "!go build %<"
         exec "!time go run %"
     elseif &filetype == 'mkd'
         exec "!~/.vim/markdown.pl % > %.html &"
         exec "!firefox %.html &"
-	endif
+    endif
 endfunc
 "C,C++的调试
 map <F8> :call Rungdb()<CR>
 func! Rungdb()
-	exec "w"
-	exec "!g++ % -std=c++11 -g -o %<"
-	exec "!gdb ./%<"
+    exec "w"
+    exec "!g++ % -g -o %<"
+    exec "!gdb ./%<"
 endfunc
 
 
@@ -268,10 +287,10 @@ endfunc
 ""实用设置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has("autocmd")
-      autocmd BufReadPost *
-          \ if line("'\"") > 0 && line("'\"") <= line("$") |
-          \   exe "normal g`\"" |
-          \ endif
+    autocmd BufReadPost *
+                \ if line("'\"") > 0 && line("'\"") <= line("$") |
+                \   exe "normal g`\"" |
+                \ endif
 endif
 "当打开vim且没有文件时自动打开NERDTree
 autocmd vimenter * if !argc() | NERDTree | endif
@@ -282,12 +301,14 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 set autoread
 " quickfix模式
 autocmd FileType c,cpp map <buffer> <leader><space> :w<cr>:make<cr>
-"代码补全 
-set completeopt=preview,menu 
-"允许插件  
+
+"changed by Anson 2017.03.14
+"代码补全
+"set completeopt=longest,menu
+"允许插件
 "filetype plugin on
-"共享剪贴板  
-"set clipboard+=unnamed 
+"共享剪贴板
+"set clipboard+=unnamed
 "自动保存
 set autowrite
 "set ruler                   " 打开状态栏标尺
@@ -296,8 +317,8 @@ set magic                   " 设置魔术
 set guioptions-=T           " 隐藏工具栏
 set guioptions-=m           " 隐藏菜单栏
 ""set foldcolumn=0
-""set foldmethod=indent 
-""set foldlevel=3 
+""set foldmethod=indent
+""set foldlevel=3
 " 不要使用vi的键盘模式，而是vim自己的
 set nocompatible
 " 去掉输入错误的提示声音
@@ -325,7 +346,8 @@ set mouse=a
 set selection=exclusive
 set selectmode=mouse,key
 " 通过使用: commands命令，告诉我们文件的哪一行被改变过
-set report=0
+set report=1
+"上一行在2017.04.23被anson 将value 改为 1
 " 在被分割的窗口间显示空白，便于阅读
 set fillchars=vert:\ ,stl:\ ,stlnc:\
 " 高亮显示匹配的括号
@@ -345,48 +367,48 @@ set scrolloff=3
 "":inoremap " ""<ESC>i
 "":inoremap ' ''<ESC>i
 ""function! ClosePair(char)
-""	if getline('.')[col('.') - 1] == a:char
-""		return "\<Right>"
-""	else
-""		return a:char
-""	endif
+""  if getline('.')[col('.') - 1] == a:char
+""      return "\<Right>"
+""  else
+""      return a:char
+""  endif
 ""endfunction
-filetype plugin indent on 
+filetype plugin indent on
 "打开文件类型检测, 加了这句才可以用智能补全
 set completeopt=longest,menu
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" CTags的设定  
+" CTags的设定
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let Tlist_Sort_Type = "name"    " 按照名称排序  
-let Tlist_Use_Right_Window = 1  " 在右侧显示窗口  
-let Tlist_Compart_Format = 1    " 压缩方式  
-let Tlist_Exist_OnlyWindow = 1  " 如果只有一个buffer，kill窗口也kill掉buffer  
-""let Tlist_File_Fold_Auto_Close = 0  " 不要关闭其他文件的tags  
-""let Tlist_Enable_Fold_Column = 0    " 不要显示折叠树  
+let Tlist_Sort_Type = "name"    " 按照名称排序
+let Tlist_Use_Right_Window = 1  " 在右侧显示窗口
+let Tlist_Compart_Format = 1    " 压缩方式
+let Tlist_Exist_OnlyWindow = 1  " 如果只有一个buffer，kill窗口也kill掉buffer
+""let Tlist_File_Fold_Auto_Close = 0  " 不要关闭其他文件的tags
+""let Tlist_Enable_Fold_Column = 0    " 不要显示折叠树
 "let Tlist_Show_One_File=1            "不同时显示多个文件的tag，只显示当前文件的
-"设置tags  
-set tags=tags;  
-set autochdir 
+"设置tags
+set tags=tags;
+set autochdir
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "其他东东
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"默认打开Taglist 
-let Tlist_Auto_Open=0 
-"""""""""""""""""""""""""""""" 
-" Tag list (ctags) 
-"""""""""""""""""""""""""""""""" 
-let Tlist_Ctags_Cmd = '/usr/local/bin/ctags' 
-let Tlist_Show_One_File = 1 "不同时显示多个文件的tag，只显示当前文件的 
+"默认打开Taglist
+let Tlist_Auto_Open=0
+""""""""""""""""""""""""""""""
+" Tag list (ctags)
+""""""""""""""""""""""""""""""""
+let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
+let Tlist_Show_One_File = 1 "不同时显示多个文件的tag，只显示当前文件的
 let Tlist_File_Fold_Auto_Close = 1
-let Tlist_Exit_OnlyWindow = 1 "如果taglist窗口是最后一个窗口，则退出vim 
+let Tlist_Exit_OnlyWindow = 1 "如果taglist窗口是最后一个窗口，则退出vim
 let Tlist_Use_Right_Window = 1 "在右侧窗口中显示taglist窗口
 " minibufexpl插件的一般设置
 let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
-let g:miniBufExplModSelTarget = 1  
+let g:miniBufExplModSelTarget = 1
 nmap tl :Tlist<cr>
 
 "python补全
@@ -413,12 +435,19 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " let Vundle manage Vundle
-" required! 
+" required!
 Bundle 'gmarik/vundle'
 
 " My Bundles here:
 "
 " original repos on github
+
+
+Bundle 'scrooloose/syntastic'
+"Plugin 'vim-autoformat'
+
+Bundle 'mattn/emmet-vim'
+Bundle 'Valloric/YouCompleteMe'
 Bundle 'tpope/vim-fugitive'
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 Bundle 'Yggdroot/indentLine'
@@ -427,6 +456,8 @@ let g:indentLine_char = '┊'
 " vim-scripts repos
 Bundle 'L9'
 Bundle 'FuzzyFinder'
+
+Bundle 'bling/vim-airline'
 " non github repos
 Bundle 'https://github.com/wincent/command-t.git'
 Bundle 'Auto-Pairs'
@@ -440,7 +471,7 @@ Bundle 'SQLComplete.vim'
 Bundle 'Javascript-OmniCompletion-with-YUI-and-j'
 "Bundle 'JavaScript-Indent'
 "Bundle 'Better-Javascript-Indentation'
-Bundle 'jslint.vim'
+"Bundle 'jslint.vim'
 Bundle "pangloss/vim-javascript"
 Bundle 'Vim-Script-Updater'
 Bundle 'ctrlp.vim'
@@ -450,6 +481,13 @@ Bundle 'The-NERD-Commenter'
 "django
 Bundle 'django_templates.vim'
 Bundle 'Django-Projects'
+
+
+
+
+
+
+
 
 "Bundle 'FredKSchott/CoVim'
 "Bundle 'djangojump'
@@ -470,3 +508,121 @@ let g:ctrlp_custom_ignore = '\v\.(exe|so|dll)$'
 let g:ctrlp_extensions = ['funky']
 
 let NERDTreeIgnore=['\.pyc']
+
+" winmanager配置
+let g:NERDTree_title='NERD Tree'
+let g:winManagerWindowLayout='NERDTree|TagList'
+function! NERDTree_Start()
+    exec 'NERDTree'
+endfunction
+
+function! NERDTree_IsValid()
+    return 1
+endfunction
+
+" 绑定F2到winmanager
+nmap <silent> <F2> :WMToggle<CR>
+
+
+set gcr=a:block-blinkon0
+
+
+" 自动补全配置
+set completeopt=longest,menu    "让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif "离开插入模式后自动关闭预览窗口
+"inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"   "回车即选中当前项
+"上下左右键的行为 会显示其他信息
+inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
+inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
+inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
+inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
+
+"youcompleteme  默认tab  s-tab 和自动补全冲突
+"let g:ycm_key_list_select_completion=['<c-n>']
+let g:ycm_key_list_select_completion = ['<Down>']
+"let g:ycm_key_list_previous_completion=['<c-p>']
+let g:ycm_key_list_previous_completion = ['<Up>']
+let g:ycm_confirm_extra_conf=0 "关闭加载.ycm_extra_conf.py提示
+
+let g:ycm_collect_identifiers_from_tags_files=1 " 开启 YCM 基于标签引擎
+let g:ycm_min_num_of_chars_for_completion=2 " 从第2个键入字符就开始罗列匹配项
+let g:ycm_cache_omnifunc=1  " 禁止缓存匹配项,每次都重新生成匹配项
+let g:ycm_seed_identifiers_with_syntax=1    " 语法关键字补全
+"nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>   "force recomile with syntastic
+"nnoremap <leader>lo :lopen<CR> "open locationlist
+"nnoremap <leader>lc :lclose<CR>    "close locationlist
+inoremap <leader><leader> <C-x><C-o>
+"在注释输入中也能补全
+let g:ycm_complete_in_comments = 1
+"在字符串输入中也能补全
+let g:ycm_complete_in_strings = 1
+"注释和字符串中的文字也会被收入补全
+let g:ycm_collect_identifiers_from_comments_and_strings = 0
+
+nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR> " 跳转到定义处
+
+Plugin 'gmarik/Vundle.vim'
+Plugin 'Chiel92/vim-autoformat'
+
+
+let g:formatdef_allman = '"astyle --style=java --pad-oper"'
+let g:formatters_cpp = ['allman']
+let g:formatters_c = ['allman']
+
+
+"let g:formatters_cpp = ['allman']
+
+"保存时自动格式化代码，针对所有支持的文件
+"au BufWrite * :Autoformat
+"保存时自动格式化PHP代码
+"au BufWrite *.php :Autoformat
+
+"auto-format
+"F12自动格式化代码并保存
+noremap <F12> :Autoformat<CR>:w<CR>
+"let g:autoformat_verbosemode=1
+
+
+"colorschem 256-jungle
+"colorscheme molokai
+"colorschem monokai
+"colorscheme clue
+
+"au GUIEnter * call libcallnr("vimtweak.dll", "SetAlpha", 234)
+
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+
+"let g:ycm_semantic_triggers =  {
+        "\
+        "\   'javascript': ['.', 're!(?=[a-zA-Z]{3,4})'],
+        "\ 
+        "\ }
+
+let g:ycm_semantic_triggers =  {
+        \
+         \ 'html': ['<', '"', '</', ' '],
+        \ 
+        \ }
+        
+
+"colorscheme molokai
+"colorscheme phd
+"
+"syntax enable
+set background=dark
+colorscheme solarized
+
+"这个可以使得vim不自动换行
+"set nowrap
+
+
+let g:loaded_acp = 1
+
+let g:syntastic_javascript_checkers = ['jshint']
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"let g:syntastic_always_populate_loc_list = 0
+"let g:syntastic_auto_loc_list = 1
+""let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
